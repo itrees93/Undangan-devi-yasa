@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan Devi & Yasa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        :root {
+            --sage-green: #7d8e7b;
+            --light-sage: #f4f7f3;
+            --accent-gold: #c5a059;
+        }
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background-color: var(--light-sage);
+            color: #333;
+            overflow-x: hidden;
+        }
+        .font-script { font-family: 'Alex Brush', cursive; }
+        .font-sans { font-family: 'Montserrat', sans-serif; }
+        
+        .hero-bg {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                        url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .floral-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.15;
+            z-index: 1;
+        }
+
+        .btn-sage {
+            background-color: var(--sage-green);
+            transition: all 0.3s ease;
+        }
+        .btn-sage:hover {
+            background-color: #6a7a68;
+            transform: translateY(-2px);
+        }
+        
+        #music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            background: white;
+            padding: 12px;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+
+        .parallax-section {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--light-sage); }
+        ::-webkit-scrollbar-thumb { background: var(--sage-green); border-radius: 10px; }
+
+        .overlay-screen {
+            position: fixed;
+            inset: 0;
+            background: #fff;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.8s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Overlay Pembuka -->
+    <div id="welcome-screen" class="overlay-screen text-center px-4">
+        <div data-aos="zoom-in">
+            <h2 class="text-xl font-sans tracking-[0.3em] text-gray-500 mb-4">THE WEDDING OF</h2>
+            <h1 class="text-6xl md:text-8xl font-script text-[#7d8e7b] mb-6">Devi & Yasa</h1>
+            <p class="font-sans text-sm mb-8 tracking-widest">KEPADA BAPAK/IBU/SAUDARA/I</p>
+            <button onclick="openInvitation()" class="btn-sage text-white px-8 py-3 rounded-full font-sans tracking-widest text-xs flex items-center mx-auto">
+                <i class="fas fa-envelope-open-text mr-2"></i> BUKA UNDANGAN
+            </button>
+        </div>
+    </div>
+
+    <!-- Music Control -->
+    <div id="music-control" class="hidden" onclick="toggleMusic()">
+        <i id="music-icon" class="fas fa-music text-[#7d8e7b]"></i>
+    </div>
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <main id="main-content" class="hidden">
+        <!-- Hero Section -->
+        <section class="hero-bg h-screen flex items-center justify-center text-center text-white relative overflow-hidden">
+            <div class="z-10 px-4">
+                <p class="font-sans tracking-[0.5em] text-sm mb-4" data-aos="fade-up">THE WEDDING OF</p>
+                <h1 class="text-7xl md:text-9xl font-script mb-4" data-aos="fade-up" data-aos-delay="200">Devi & Yasa</h1>
+                <p class="font-sans tracking-widest text-lg" data-aos="fade-up" data-aos-delay="400">29 . 03 . 2026</p>
+            </div>
+        </section>
+
+        <!-- Quotes Section -->
+        <section class="py-20 px-6 text-center max-w-4xl mx-auto" data-aos="fade-up">
+            <i class="fas fa-quote-left text-3xl text-[#7d8e7b] mb-6 opacity-30"></i>
+            <p class="text-xl md:text-2xl italic leading-relaxed text-gray-600 mb-6">
+                "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang."
+            </p>
+            <p class="font-sans font-bold text-sm tracking-widest text-[#7d8e7b]">(QS. AR-RUM: 21)</p>
+        </section>
+
+        <!-- Mempelai Section -->
+        <section class="py-20 bg-white relative overflow-hidden">
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <h2 class="text-4xl md:text-5xl font-script text-[#7d8e7b]">Mempelai Berbahagia</h2>
+                    <div class="w-24 h-px bg-[#7d8e7b] mx-auto mt-4"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center max-w-5xl mx-auto">
+                    <!-- Mempelai Wanita -->
+                    <div class="text-center" data-aos="fade-right">
+                        <div class="w-64 h-64 mx-auto mb-8 rounded-full overflow-hidden border-8 border-[#f4f7f3] shadow-xl">
+                            <img src="https://lh3.googleusercontent.com/d/1sccI2zABLqORddZHLqETG79wrnbQM56Z" alt="Devi Meildawati" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-4xl font-script text-[#7d8e7b] mb-2">Devi Meildawati</h3>
+                        <p class="font-sans text-xs tracking-widest text-gray-500 uppercase mb-4">Mempelai Wanita</p>
+                        <p class="text-lg text-gray-600 italic">Putri pertama dari</p>
+                        <p class="text-lg font-bold text-gray-700">Bp. Soedarman & Ibu Isro’ Iyah</p>
+                        <div class="mt-4 flex justify-center space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-[#7d8e7b]"><i class="fab fa-instagram text-xl"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Mempelai Pria -->
+                    <div class="text-center" data-aos="fade-left">
+                        <div class="w-64 h-64 mx-auto mb-8 rounded-full overflow-hidden border-8 border-[#f4f7f3] shadow-xl">
+                            <img src="https://lh3.googleusercontent.com/d/1uWffJKc4S07g6oqvqVNmPqC8n_v6eAmc" alt="Muhammad Yasa" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-4xl font-script text-[#7d8e7b] mb-2">Muhammad Yasa</h3>
+                        <p class="font-sans text-xs tracking-widest text-gray-500 uppercase mb-4">Mempelai Pria</p>
+                        <p class="text-lg text-gray-600 italic">Putra ketiga dari</p>
+                        <p class="text-lg font-bold text-gray-700">Bp. Muntaham (alm) & Ibu Siti Aisyah</p>
+                        <div class="mt-4 flex justify-center space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-[#7d8e7b]"><i class="fab fa-instagram text-xl"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Countdown Section -->
+        <section class="py-20 bg-[#7d8e7b] text-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-sans tracking-[0.3em] mb-12" data-aos="fade-up">MENGHITUNG HARI</h2>
+                <div class="flex justify-center space-x-4 md:space-x-10" id="countdown" data-aos="zoom-in">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 w-20 md:w-32">
+                        <span id="days" class="text-3xl md:text-5xl font-bold block">00</span>
+                        <span class="text-xs uppercase tracking-widest">Hari</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 w-20 md:w-32">
+                        <span id="hours" class="text-3xl md:text-5xl font-bold block">00</span>
+                        <span class="text-xs uppercase tracking-widest">Jam</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 w-20 md:w-32">
+                        <span id="minutes" class="text-3xl md:text-5xl font-bold block">00</span>
+                        <span class="text-xs uppercase tracking-widest">Menit</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 w-20 md:w-32">
+                        <span id="seconds" class="text-3xl md:text-5xl font-bold block">00</span>
+                        <span class="text-xs uppercase tracking-widest">Detik</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Acara Section -->
+        <section class="py-20 px-6 relative">
+            <div class="container mx-auto max-w-5xl">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <h2 class="text-4xl md:text-5xl font-script text-[#7d8e7b]">Waktu & Lokasi Acara</h2>
+                    <p class="text-gray-500 font-sans tracking-widest mt-2 uppercase text-xs">Akan dilaksanakan pada:</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <!-- Akad -->
+                    <div class="bg-white p-10 rounded-2xl shadow-xl border-t-8 border-[#7d8e7b]" data-aos="fade-up">
+                        <i class="fas fa-heart text-3xl text-[#7d8e7b] mb-6"></i>
+                        <h3 class="text-3xl font-script text-[#7d8e7b] mb-4">Akad Nikah</h3>
+                        <div class="space-y-4 text-gray-700">
+                            <div class="flex items-center">
+                                <i class="far fa-calendar-alt w-8 text-[#7d8e7b]"></i>
+                                <span>Minggu, 29 Maret 2026</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="far fa-clock w-8 text-[#7d8e7b]"></i>
+                                <span>08:00 WIB - Selesai</span>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-map-marker-alt w-8 mt-1 text-[#7d8e7b]"></i>
+                                <span>Resto Dito<br>Jl. Banyu Urip no.65 Surabaya</span>
+                            </div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Resto+Dito+Jl+Banyu+Urip+no.65+Surabaya" target="_blank" class="mt-8 inline-block btn-sage text-white px-6 py-2 rounded-full text-sm font-sans tracking-widest">PENUNJUK JALAN</a>
+                    </div>
+
+                    <!-- Resepsi -->
+                    <div class="bg-white p-10 rounded-2xl shadow-xl border-t-8 border-[#7d8e7b]" data-aos="fade-up" data-aos-delay="200">
+                        <i class="fas fa-glass-cheers text-3xl text-[#7d8e7b] mb-6"></i>
+                        <h3 class="text-3xl font-script text-[#7d8e7b] mb-4">Resepsi</h3>
+                        <div class="space-y-4 text-gray-700">
+                            <div class="flex items-center">
+                                <i class="far fa-calendar-alt w-8 text-[#7d8e7b]"></i>
+                                <span>Minggu, 29 Maret 2026</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="far fa-clock w-8 text-[#7d8e7b]"></i>
+                                <span>11:00 - 14:00 WIB</span>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-map-marker-alt w-8 mt-1 text-[#7d8e7b]"></i>
+                                <span>Resto Dito<br>Jl. Banyu Urip no.65 Surabaya</span>
+                            </div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Resto+Dito+Jl+Banyu+Urip+no.65+Surabaya" target="_blank" class="mt-8 inline-block btn-sage text-white px-6 py-2 rounded-full text-sm font-sans tracking-widest">PENUNJUK JALAN</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Digital Gift -->
+        <section class="py-20 bg-[#f9faf8] text-center px-6">
+            <div class="max-w-2xl mx-auto" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-script text-[#7d8e7b] mb-6">Kado Digital</h2>
+                <p class="text-gray-600 mb-10">Doa restu Anda merupakan karunia terindah bagi kami. Namun jika Anda ingin memberikan tanda kasih, Anda dapat memberikannya melalui:</p>
+                
+                <div class="grid grid-cols-1 gap-6">
+                    <div class="bg-white p-8 rounded-xl shadow-md border border-gray-100 flex flex-col items-center">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Bank_Central_Asia.svg" alt="BCA" class="h-8 mb-4">
+                        <p class="font-bold text-xl tracking-widest mb-1" id="rek-bca">1030065774</p>
+                        <p class="text-gray-500 text-sm mb-4 uppercase">A/N DEVI MEILDAWATI</p>
+                        <button onclick="copyToClipboard('1234567890')" class="text-xs text-[#7d8e7b] border border-[#7d8e7b] px-4 py-1 rounded-full hover:bg-[#7d8e7b] hover:text-white transition">SALIN NOMOR</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <section class="py-20 bg-white text-center">
+            <div data-aos="zoom-in">
+                <h2 class="text-5xl md:text-7xl font-script text-[#7d8e7b] mb-4">Terima Kasih</h2>
+                <p class="font-sans tracking-[0.3em] text-gray-500 uppercase text-xs mb-10">Kami yang berbahagia</p>
+                <h3 class="text-3xl font-script text-[#7d8e7b]">Devi & Yasa</h3>
+                
+                <div class="mt-20 pt-10 border-t border-gray-100">
+                    <p class="text-xs font-sans text-gray-400">Created with ❤️ for Devi & Yasa</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-6 py-3 rounded-full text-sm opacity-0 transition-opacity pointer-events-none z-[1000]">
+        Nomor rekening berhasil disalin!
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Inisialisasi AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'ease-out-quart'
+        });
+
+        // Audio Control
+        const bgMusic = document.getElementById('bg-music');
+        const musicIcon = document.getElementById('music-icon');
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicIcon.classList.remove('fa-spin');
+                musicIcon.classList.replace('fa-music', 'fa-play');
+            } else {
+                bgMusic.play();
+                musicIcon.classList.add('fa-spin');
+                musicIcon.classList.replace('fa-play', 'fa-music');
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // Buka Undangan
+        function openInvitation() {
+            const welcome = document.getElementById('welcome-screen');
+            const content = document.getElementById('main-content');
+            const musicBtn = document.getElementById('music-control');
+            
+            welcome.style.transform = 'translateY(-100%)';
+            content.classList.remove('hidden');
+            musicBtn.classList.remove('hidden');
+            
+            // Start music
+            bgMusic.play().then(() => {
+                isPlaying = true;
+                musicIcon.classList.add('fa-spin');
+            }).catch(e => console.log("Audio play blocked"));
+
+            // Re-init AOS to handle hidden elements
+            setTimeout(() => {
+                AOS.refresh();
+            }, 100);
+        }
+
+        // Countdown Timer
+        const weddingDate = new Date("2026-03-29 08:00:00").getTime();
+
+        const timer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
+
+            if (distance < 0) {
+                clearInterval(timer);
+                document.getElementById("countdown").innerHTML = "ACARA SUDAH DIMULAI";
+            }
+        }, 1000);
+
+        // Copy to Clipboard
+        function copyToClipboard(text) {
+            const tempInput = document.createElement("input");
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+
+            // Show Toast
+            const toast = document.getElementById('toast');
+            toast.style.opacity = '1';
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
